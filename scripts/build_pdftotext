@@ -10,6 +10,8 @@ TEMP_DIR=$(mktemp -d /tmp/poppler.XXXXXXXXXX)
 #  apt-get install -y xz-utils
 #fi
 
+apt-get install cmake
+
 echo "Serving files from /tmp on $PORT"
 cd /tmp
 python -m SimpleHTTPServer $PORT &
