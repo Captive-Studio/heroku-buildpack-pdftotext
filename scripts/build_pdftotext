@@ -1,6 +1,6 @@
 #!/bin/bash
 
-POPPLER_VERSION=${POPPLER_VERSION-0.57.0}
+POPPLER_VERSION=${POPPLER_VERSION-0.69.0}
 POPPLER_TARBALL_URL="https://poppler.freedesktop.org/poppler-${POPPLER_VERSION}.tar.xz"
 TEMP_DIR=$(mktemp -d /tmp/poppler.XXXXXXXXXX)
 
@@ -22,12 +22,11 @@ curl -L $POPPLER_TARBALL_URL | tar xJ
 
 (
 	cd poppler-${POPPLER_VERSION}
-	./configure \
-	  --prefix=/tmp/poppler \
-	  --disable-shared \
-	  --enable-build-type=release \
-	  --enable-libopenjpeg=none
-	make install
+  mkdir build
+  cd build
+  cmake -DCMAKE_INSTALL_PREFIX=/tmp/poppler -DCMAKE_BUILD_TYPE=release
+  make
+  make install
 )
 
 cp /tmp/poppler/bin/pdftotext $1
