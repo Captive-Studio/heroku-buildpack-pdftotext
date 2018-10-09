@@ -10,7 +10,8 @@ TEMP_DIR=$(mktemp -d /tmp/poppler.XXXXXXXXXX)
 #  apt-get install -y xz-utils
 #fi
 
-sudo apt-get install cmake
+apt-get update
+apt-get install -y xz-utils
 
 echo "Serving files from /tmp on $PORT"
 cd /tmp
@@ -24,11 +25,9 @@ curl -L $POPPLER_TARBALL_URL | tar xJ
 
 (
 	cd poppler-${POPPLER_VERSION}
-  mkdir build
-  cd build
-  cmake -DCMAKE_INSTALL_PREFIX=/tmp/poppler -DCMAKE_BUILD_TYPE=release
-  make
-  make install
+	apt-get install build-essential cmake
+	cmake -DCMAKE_INSTALL_PREFIX=/tmp/poppler -DCMAKE_BUILD_TYPE=release
+	make install
 )
 
 cp /tmp/poppler/bin/pdftotext $1
