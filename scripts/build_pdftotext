@@ -25,7 +25,7 @@ curl -L $POPPLER_TARBALL_URL | tar xJ
 
 (
 	cd poppler-${POPPLER_VERSION}
-	apt-get install build-essential cmake
+	apt-get install build-essential cmake libopenjp2-7-dev
 	cmake -DCMAKE_INSTALL_PREFIX=/tmp/poppler -DCMAKE_BUILD_TYPE=release
 	make install
 )
